@@ -15,18 +15,16 @@
 ---
 ## Preprocessing
 
-- As we started to explore our data, we found that our data was already quite clean, and the only two required steps were **scaling the data**, **encoding the categorical features**, and **removing outliers**.
+- As we started to explore our data, we found that our data was already quite clean, and the only two required steps were **scaling the data** and **encoding the categorical features**.
 - **Scaling the data**
   - We used min-max normalization, as the data is not very normally distributed.
 - **Encoding the categorical features**
   - We used one-hot encoding for Cuisine and Location to encode the categorical features. For Parking Availability, it made more sense to encode it simply as 0 and 1 because the feature is a boolean value.
--  **Removing Outliers**
-   - To remove the outliers, we used log transformation.
  
-## Regression Models
+## Model Selection
 
-- With our data cleaned up, we created our first models, starting with a linear and polynomial model.
+- After preprocessing, we tried a variety of different models without any tuning to see how they perform on the dataset. Specifically, we use linear regression, a decision tree, a random forest, K-Nearest Neighbors, and an SVM. Out of these (without tuning), the random forest performed the best, so we attempted to tune its hyperparameters a bit.
 
-Here's the [link](https://colab.research.google.com/github/Viridian01/CSE-151A-Restaurant-Revenue/blob/main/main.ipynb) to our data exploration.
+Here is the [link](https://colab.research.google.com/github/Viridian01/CSE-151A-Restaurant-Revenue/blob/main/main.ipynb) to our data exploration.
 
 ---
