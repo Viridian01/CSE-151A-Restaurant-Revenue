@@ -27,4 +27,8 @@
 
 Here is the [link](https://colab.research.google.com/github/Viridian01/CSE-151A-Restaurant-Revenue/blob/main/main.ipynb) to our data exploration.
 
+## Conclusion
+
+After training and evaluating our first model, we obtained an RMSE of about \$42000 on the training set and about \$65000 on the testing set. For reference, the mean revenue across the dataset is about \$656000, so our first model already gives predictions generally about 10% away from the actual revenue. Since our model's training performance is a bit better than its testing performance, it is likely slightly overfitting the training data. Though we could theoretically spend more time tuning it with more hyperparameters, we've already seen in the grid search that the hyperparameters do not seem to have much effect on the results. Thus, we can either try considering simpler models (i.e., tuning the ones we've already looked at), or using a neural network. For variety, we will try a fully-connected neural network (MLP), which we can more thoroughly tune.
+
 ---
