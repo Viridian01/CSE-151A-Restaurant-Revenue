@@ -2,7 +2,14 @@
 
 ## Introduction
 
-<p style="margin-top: 20px;">&emsp; Do you ever wonder why some restaurants are more successful than others? Could it be the type of cuisine, consumer preferences, or menu prices? We hope to answer this question by developing a model that aims to predict our measure of success, and total revenue, utilizing many attributes about a restaurant. We chose this area of focus for a variety of reasons. First, the idea of predicting the success of an institution in the food sector immediately appeals to us as both a topic not heavily explored, as well as one that can personally affect us as consumers. Many of the applications of predictive machine learning models are in large companies and institutions, but restaurants can be locally owned, even by the people close to us. Second, our dataset is clean and contains a large enough sample size with enough features, both vital aspects for training a performant model. Through this project, we hope not only to better understand the financial aspects of food but also to create a useful tool for small business owners to fine-tune their restaurants to maximize their revenue.</p>
+<p style="margin-top: 20px;">&emsp; Do you ever wonder why some restaurants are more successful than others? Could it be the type of cuisine, consumer preferences, or menu prices? We hope to answer this question by developing a model that aims to predict our measure of success, and total revenue, utilizing many attributes about a restaurant. We chose this area of focus for a variety of reasons. First, the idea of predicting the success of an institution in the food sector immediately appeals to us as both a topic not heavily explored, as well as one that can personally affect us as consumers. Many of the applications of predictive machine learning models are in large companies and institutions, but restaurants can be locally owned, even by the people close to us. Furthermore, our dataset is clean and contains a large enough sample size with enough features, which are both vital aspects for training a performant model. Through this project, we hope not only to better understand the financial aspects of food but also to create a useful tool for small business owners to fine-tune their restaurants to maximize their revenue.</p>
+
+## Full Report
+This is where you can find our full report on the project:
+<a target="_blank" href="">
+   <img src="https://img.shields.io/badge/Download%20as%20PDF-EF3939?style=flat&logo=adobeacrobatreader&logoColor=white&color=black&labelColor=ec1c24">
+</a>
+
 
 ## Environment setup instructions:
 
@@ -27,7 +34,7 @@
  
 ## Model Selection
 
-- After preprocessing, we tried a variety of different models without any tuning to see how they perform on the dataset. Specifically, we use linear regression, a decision tree, a random forest, K-Nearest Neighbors, and an SVM. Out of these (without tuning), the random forest performed the best, so we attempted to tune its hyperparameters a bit.
+- After preprocessing, we tried a variety of different models without any tuning to see how they perform on the dataset. Specifically, we use linear regression, a decision tree, a random forest, K-Nearest Neighbors, SVM, and Neural Networks. Out of these (without tuning), the **random forest** performed the best, so we attempted to tune its hyperparameters a bit.
 
 Gateway to Jupyter Notebook:
 <a target="_blank" href="https://colab.research.google.com/github/Viridian01/CSE-151A-Restaurant-Revenue/blob/milestone4/main.ipynb">
