@@ -40,7 +40,8 @@ Here is PDF version of our written report:
 ## Introduction
 <p style="margin-top: 20px;">&emsp; Do you ever wonder why some restaurants are more successful than others? Could it be the type of cuisine, consumer preferences, or menu prices? We hope to answer this question by developing a model that aims to predict our measure of success, and total revenue, utilizing many attributes about a restaurant. We chose this area of focus for a variety of reasons. First, the idea of predicting the success of an institution in the food sector immediately appeals to us as both a topic not heavily explored, as well as one that can personally affect us as consumers. Many of the applications of predictive machine learning models are in large companies and institutions, but restaurants can be locally owned, even by the people close to us. Furthermore, our dataset is clean and contains a large enough sample size with enough features, which are both vital aspects for training a performant model. Through this project, we hope not only to better understand the financial aspects of food but also to create a useful tool for small business owners to fine-tune their restaurants to maximize their revenue.</p>
 
-## Data Exploration
+## Methods
+### Data Exploration
 We first introduce our dataset, with examples shown in [Table 1](#preprocessing). The full dataset can be found at this [URL](https://colab.research.google.com/github/Viridian01/CSE-151A-Restaurant-Revenue/blob/milestone4/main.ipynb). Our dataset has 8368 observations and 17 features (including the target, and revenue). The features are as follows:
 
    - `Name` — serves as an identifier for each restaurant.
@@ -73,7 +74,7 @@ Note that we make some assumptions about our dataset's features, the motivation 
   <p><em>Pairplot</em></p>
 </div>
 
-## Preprocessing
+### Preprocessing
 Our dataset is already quite clean, so little preprocessing is required. Notably, our dataset contains no missing data, so imputation is not required. Our only preprocessing steps are the following:
    1. We encode the categorical features. For `Cuisine` and `Location`, we used One-Hot encoding. For `Parking Availability`, we simply encode it as 0 and 1, as the feature is a boolean value.
 
@@ -102,13 +103,38 @@ Our dataset is already quite clean, so little preprocessing is required. Notably
 
 Our data exploration also shows that many features are already very linearly correlated with `Revenue`, so we do not feel the need to expand our feature set any further. Finally, we split our dataset into a training and testing subset.
  
-## Model Selection
+### Model Selection
 To select a model, we compare a variety of regression models using cross-validation on our training set. The models chosen are simple linear regression, k-nearest neighbors (KNN), a decision tree, a random forest, a support vector regressor (SVR), and a multilayer perceptron (MLP). After determining which model yields the best evaluation metric, for which we use root mean squared error (RMSE), we perform further hyperparameter tuning to determine whether our model can be improved further. The results of our model selection process are discussed in the next section.
+
+## Results
+The cross-validation results of our models are shown in Figure `Model Performance Histogram`. Note that the RMSE here is scaled and not an interpretable value relative to the true revenue values.
 
 <div align="center">
 	<img width = "50%" src="assets/models_performance.png">
   <p><em>Model Performance Histogram</em></p>
 </div>
 
+We tune hyperparameters only for the random forest model and the MLP. Performing a grid search over two hyperparameters for the random forest yields the results shown in Figure [figure]. 
+
+<!--- gridsearch figure here --->
+
+Additionally, we tune the number of units within each layer (excluding the output layer) for the MLP to further optimize the model.
+
+
+Finally, after tuning both model candidates, the random forest achieves about \$27651 RMSE on the training set and \$65764 on the testing set, while the MLP achieves \$69303 RMSE on the training set and \$71011 on the testing set. For reference, the mean revenue across the dataset is about \$656000. The fitting results are shown in Figure [figure], which displays both the true and predicted values for both models.
+
+<!--- graph figure here --->
+
+To gain insights into which features contribute the most to our Random Forest model's predictions, we examined the feature importance. The features with the highest importance were the average meal price, seating capacity, and marketing budget. This suggests that these factors play a significant role in determining a restaurant's revenue, aligning with intuitive expectations about the impact of pricing, capacity, and marketing efforts on financial performance.
+
+## Discussion
+### Model Selection and Evaluation
+Our model selection process was relatively straightforward due to the strong linear correlations between many of the features and the target variable, revenue. This linearity allowed even simpler models to perform reasonably well without extensive tuning. The random forest model stood out, achieving an RMSE of \$27651 on the training set and \$65764 on the testing set. The slight overfitting observed suggests that while the model captures patterns well, it also picks up noise in the training data. The MLP model, with an RMSE of \$69303 on the training set and \$71011 on the testing set, performed slightly worse but validated the robustness of our feature set.
+
+### Data Assumptions and Limitations
+We made several assumptions regarding the dataset, such as assuming all currency values were in USD and interpreting various features like marketing budget and reservations on a monthly and weekly basis, respectively. These assumptions could introduce inaccuracies if the actual units differ. The dataset's unusually clean and consistent nature raises the possibility that it might be synthetic, which would limit the generalizability of our models to real-world scenarios.
+
+### Shortcomings
+A major shortcoming is the dataset's lack of diversity, containing only higher-end restaurants with average meal prices above \$25 and excluding many common cuisines. This limits our model's applicability to a broader range of restaurants. Additionally, hyperparameter tuning yielded minimal improvements, suggesting that our initial models were already near-optimal or that our search space was insufficiently extensive.
+
 ## Conclusion
-After training and evaluating our first model, we obtained an RMSE of about \$42000 on the training set and about \$65000 on the testing set. For reference, the mean revenue across the dataset is about \$656000, so our first model already gives predictions generally about 10% away from the actual revenue. Since our model's training performance is a bit better than its testing performance, it is likely slightly overfitting the training data. Though we could theoretically spend more time tuning it with more hyperparameters, we've already seen in the grid search that the hyperparameters do not seem to have much effect on the results. Thus, we can either try considering simpler models (i.e., tuning the ones we've already looked at), or using a neural network. For variety, we will try a fully-connected neural network (MLP), which we can more thoroughly tune.
