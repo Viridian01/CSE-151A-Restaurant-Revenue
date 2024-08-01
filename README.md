@@ -1,6 +1,8 @@
 # CSE-151A-Restaurant-Revenue    🍽☕️🍻
 
-For the most accurate version of our findings, please see the PDF version here. <a target="_blank" href="https://github.com/Viridian01/CSE-151A-Restaurant-Revenue/blob/8c05b95b5ab2befe95c37c99334125ab8a08de2a/assets/CSE_151A___Restaurant_Revenue.pdf">
+For the most accurate version of our findings, please see the PDF version here. 
+
+<a target="_blank" href="https://github.com/Viridian01/CSE-151A-Restaurant-Revenue/blob/8c05b95b5ab2befe95c37c99334125ab8a08de2a/assets/CSE_151A___Restaurant_Revenue.pdf">
    <img src="https://img.shields.io/badge/Download%20as%20PDF-EF3939?style=flat&logo=adobeacrobatreader&logoColor=white&color=black&labelColor=ec1c24">
 </a>
 
@@ -63,16 +65,6 @@ We first introduce our dataset, with examples shown in [Table 1](#preprocessing)
 
 Note that we make some assumptions about our dataset's features, the motivation for which is detailed in our notebook. Our notebook also details some further data exploration steps: however, crucial findings are later discussed.
 
-<div align="center">
-	<img width = "50%" src="assets/heatmap.png">
-  <p><em>Heatmap</em></p>
-</div>
-
-<div align="center">
-	<img width = "80%" src="assets/pairplot.png">
-  <p><em>Pairplot</em></p>
-</div>
-
 | Name                      | Restaurant 0 | Restaurant 1 | Restaurant 2 |
 |---------------------------|--------------|--------------|--------------|
 | Location                  | Rural        | Downtown     | Rural        |
@@ -102,21 +94,21 @@ Our dataset is already quite clean, so little preprocessing is required. Notably
 Our data exploration also shows that many features are already very linearly correlated with `Revenue`, so we do not feel the need to expand our feature set any further. Finally, we split our dataset into a training and testing subset.
  
 ### Model Selection
-To select a model, we compare a variety of regression models using cross-validation on our training set. The models chosen are simple linear regression, k-nearest neighbors (KNN), a decision tree, a random forest regressor, a support vector regressor (SVR), and a multilayer perceptron (MLP). After determining which model yields the best evaluation metric, for which we use root mean squared error (RMSE), we perform further hyperparameter tuning to determine whether our model can be improved further. The results of our model selection process are discussed in the next section.
+To select a model, we compare a variety of regression models using 5-fold cross-validation on our training set. The models chosen are simple linear regression, k-nearest neighbors (KNN), a decision tree, a random forest regressor, a support vector regressor (SVR), and a multilayer perceptron (MLP). After determining which model yields the best evaluation metric, for which we use root mean squared error (RMSE), we perform further hyperparameter tuning to determine whether our model can be improved further. The results of our model selection process are discussed in the next section.
 
 ## Results
 The cross-validation results of our initial models (excluding the MLP) are shown in Figure `Model Performance Histogram`. Note that the RMSE here is scaled and not an interpretable value relative to the true revenue values.
 
 <div align="center">
 	<img width = "50%" src="assets/models_performance.png">
-  <p><em>Model Performance Histogram</em></p>
+  <p><em>Figure 1: Model Performance Histogram</em></p>
 </div>
 
 We tune hyperparameters only for the random forest model and the MLP. Performing a grid search over two hyperparameters for the random forest yields the results shown in Figure `Random Forest Performance with Hyperparameter Tuning`.
 
 <div align="center">
 	<img width = "50%" src="assets/hypparam_tuning.png">
-  <p><em>Random Forest Performance with Hyperparameter Tuning</em></p>
+  <p><em>Figure 2: Random Forest Performance with Hyperparameter Tuning</em></p>
 </div>
 
 Additionally, we tune the number of units within each layer (excluding the output layer) for the MLP to further optimize the model. After doing so, the best architecture we obtained was a fully connected 5-layer network. It includes an input layer, three hidden layers with ReLU activation functions containing 176, 16, 56, and 48 nodes respectively, and a sigmoid output layer.
@@ -125,31 +117,31 @@ Finally, after tuning both model candidates, the random forest achieves about 45
 
 <div align="center">
 	<img width = "50%" src="assets/train_scatter.png">
-  <p><em>RandomForest Training Set</em></p>
+  <p><em>Figure 3: RandomForest Training Set</em></p>
 </div>
 
 <div align="center">
 	<img width = "50%" src="assets/test_scatter.png">
-  <p><em>RandomForest Testing Set</em></p>
+  <p><em>Figure 4: RandomForest Testing Set</em></p>
 </div>
 
-The fitting results for the hyperparameter-tuned MLP shown in Figure `Tuned MLP Training Set` and `Tuned MLP Testing Set`, display both the true and predicted values for both models, as well as the RMSE.
+The fitting results for the tuned MLP shown in Figure `Tuned MLP Training Set` and `Tuned MLP Testing Set`, display both the true and predicted values for both models, as well as the RMSE.
 
 <div align="center">
 	<img width = "50%" src="assets/train_scatter_tuned.png">
-  <p><em>Tuned MLP Training Set</em></p>
+  <p><em>Figure 5: Tuned MLP Training Set</em></p>
 </div>
 
 <div align="center">
 	<img width = "50%" src="assets/test_scatter_tuned.png">
-  <p><em>Tuned MLP Testing Set</em></p>
+  <p><em>Figure 6: Tuned MLP Testing Set</em></p>
 </div>
 
 Since our random forest model performs the best, we finally look into the feature importances for the model's predictions, as seen in Figure 7. The features with the highest importance were the average meal price, seating capacity, and marketing budget. This suggests that these factors play a significant role in determining a restaurant's revenue, aligning with intuitive expectations about the impact of pricing, capacity, and marketing efforts on financial performance.
 
 <div align="center">
 	<img width = "50%" src="assets/feature_importance.png">
-  <p><em>Feature Importancet</em></p>
+  <p><em>Figure 7: Feature Importancet</em></p>
 </div>
 
 
@@ -158,6 +150,11 @@ Since our random forest model performs the best, we finally look into the featur
 Our model selection process was relatively straightforward due to the strong linear correlations between many of the features and the target variable, revenue. This linearity allowed even simpler models to perform reasonably well without extensive tuning. The Random Forest model stood out, achieving an RMSE of \$45897 on the training set and \$64767 on the testing set. The slight overfitting observed suggests that while the model captures patterns well, it also picks up noise in the training data. The MLP model, with an RMSE of \$45410 on the training set and \$71401 on the testing set, performed slightly worse but validated the robustness of our feature set. Due to the Random Forest model performing better than our hyperparameter-tuned MLP, we decided to choose Random Forest as our final model to evaluate and conclude our results on.\\
 
 Observing the most important features in Figure 7, we see that overall, the features with the highest importance are the average meal price, seating capacity, and marketing budget. This suggests that these factors play a significant role in determining a restaurant's revenue, aligning with intuitive expectations about the impact of pricing, capacity, and marketing efforts on financial performance. However, it is surprising to see just how much average meal price leads by, as we expect other features to be somewhat close in terms of importance. Still, there may be more hidden features and factors that can contribute to the revenue and success of a restaurant. Another relevant set of data for our feature importances is simply the linear correlations of features, shown in Figure 8. Again, we see that average meal price and seating capacity are the most highly linearly correlated with revenue. Thus, one may be tempted to assume that increasing both of these factors can increase revenue; however, this ignores many other factors that can be associated with these two features. For example, a restaurant that charges more for meals will generally be a higher-end restaurant, which can affect the kind of customer attending. However, for a lower-end restaurant, it may not make sense to directly increase prices to hope for revenue increase.
+
+<div align="center">
+	<img width = "50%" src="assets/heatmap.png">
+  <p><em>Figure 8: Heatmap</em></p>
+</div>
 
 ### Data Assumptions and Limitations
 We made several assumptions regarding the dataset, such as assuming all currency values were in USD and interpreting various features like marketing budget and reservations on a monthly and weekly basis, respectively. These assumptions could introduce inaccuracies if the actual units differ. The dataset's unusually clean and consistent nature raises the possibility that it might be synthetic, which would limit the relevancy of our models to real-world scenarios.
