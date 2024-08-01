@@ -1,5 +1,9 @@
 # CSE-151A-Restaurant-Revenue    🍽☕️🍻
 
+For the most accurate version of our findings, please see the PDF version here. <a target="_blank" href="https://github.com/Viridian01/CSE-151A-Restaurant-Revenue/blob/8c05b95b5ab2befe95c37c99334125ab8a08de2a/assets/CSE_151A___Restaurant_Revenue.pdf">
+   <img src="https://img.shields.io/badge/Download%20as%20PDF-EF3939?style=flat&logo=adobeacrobatreader&logoColor=white&color=black&labelColor=ec1c24">
+</a>
+
 ## Milestone 2
 Gateway to Milestone 2:
 <a target="_blank" href="https://github.com/Viridian01/CSE-151A-Restaurant-Revenue/tree/milestone2">
@@ -17,12 +21,6 @@ Gateway to Milestone 3:
 Gateway to the Jupyter Notebook:
 <a target="_blank" href="https://colab.research.google.com/github/Viridian01/CSE-151A-Restaurant-Revenue/blob/milestone4/main.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-
-## Written Report
-Here is the PDF version of our written report:
-<a target="_blank" href="https://github.com/Viridian01/CSE-151A-Restaurant-Revenue/blob/8c05b95b5ab2befe95c37c99334125ab8a08de2a/assets/CSE_151A___Restaurant_Revenue.pdf">
-   <img src="https://img.shields.io/badge/Download%20as%20PDF-EF3939?style=flat&logo=adobeacrobatreader&logoColor=white&color=black&labelColor=ec1c24">
 </a>
 
 ## Environment setup instructions:
